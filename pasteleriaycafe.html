@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Café & Pastelería Delicatesse</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<style>
+    :root {
+        --primary: #d4a574;
+        --secondary: #f8f5f0;
+        --accent: #8b6f47;
+        --text-dark: #2c2416;
+        --text-light: #6b5d4f;
+        --white: #ffffff;
+        --shadow-sm: 0 2px 10px rgba(0,0,0,0.08);
+        --shadow-md: 0 8px 30px rgba(0,0,0,0.12);
+        --shadow-lg: 0 15px 50px rgba(0,0,0,0.15);
+    }
+
+    * {
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: var(--secondary);
+        color: var(--text-dark);
+        overflow-x: hidden;
+        width: 100%;
+    }
+
+    /* HEADER MEJORADO */
+    header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+
+    header.scrolled {
+        padding: 10px 5%;
+        box-shadow: var(--shadow-md);
+    }
+
+    .logo {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(20px, 5vw, 28px);
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 1px;
+        position: relative;
+        white-space: nowrap;
+    }
+
+    .logo::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background: var(--primary);
+    }
+
+    nav {
+        display: flex;
+        gap: clamp(15px, 3vw, 35px);
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    nav a {
+        color: var(--text-dark);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: clamp(13px, 2vw, 15px);
+        position: relative;
+        transition: color 0.3s ease;
+        white-space: nowrap;
+    }
+
+    nav a::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+
+    nav a:hover {
+        color: var(--accent);
+    }
+
+    nav a:hover::after {
+        width: 100%;
+    }
+
+    /* HERO MEJORADO */
+    .hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: linear-gradient(135deg, rgba(212, 165, 116, 0.1) 0%, rgba(248, 245, 240, 0.8) 100%),
+                    url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600') center/cover;
+        overflow: hidden;
+        padding: 80px 5% 60px;
+        width: 100%;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(248, 245, 240, 0.7);
+        backdrop-filter: blur(2px);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 900px;
+        padding: 0 20px;
+        width: 100%;
+    }
+
+    .hero h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(32px, 8vw, 72px);
+        margin-bottom: 20px;
+        font-weight: 700;
+        color: var(--text-dark);
+        line-height: 1.2;
+        animation: fadeInUp 1s ease forwards;
+        text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
+        word-wrap: break-word;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(16px, 4vw, 24px);
+        color: var(--text-light);
+        margin-bottom: 20px;
+        font-weight: 300;
+        letter-spacing: 0.5px;
+        animation: fadeInUp 1.2s ease forwards;
+    }
+
+    .hero p {
+        font-size: clamp(14px, 3vw, 18px);
+        color: var(--text-light);
+        line-height: 1.8;
+        margin-bottom: 30px;
+        animation: fadeInUp 1.4s ease forwards;
+        max-width: 100%;
+    }
+
+    @keyframes fadeInUp {
+        from { 
+            opacity: 0; 
+            transform: translateY(30px); 
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+    }
+
+    .btn-main {
+        display: inline-block;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        padding: clamp(14px, 3vw, 18px) clamp(30px, 6vw, 45px);
+        border-radius: 50px;
+        color: white;
+        text-decoration: none;
+        font-size: clamp(14px, 3vw, 16px);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        box-shadow: var(--shadow-md);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+        animation: fadeInUp 1.6s ease forwards;
+    }
+
+    .btn-main::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .btn-main:hover::before {
+        left: 100%;
+    }
+
+    .btn-main:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    /* DECORACIONES */
+    .hero-decoration {
+        position: absolute;
+        width: clamp(100px, 20vw, 200px);
+        height: clamp(100px, 20vw, 200px);
+        border-radius: 50%;
+        background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+        opacity: 0.15;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .hero-decoration:nth-child(1) {
+        top: 10%;
+        left: 5%;
+    }
+
+    .hero-decoration:nth-child(2) {
+        bottom: 15%;
+        right: 5%;
+        animation-delay: 2s;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-20px) scale(1.05); }
+    }
+
+    /* SECTIONS */
+    .section {
+        padding: clamp(60px, 10vw, 100px) 5%;
+        max-width: 1200px;
+        margin: auto;
+        width: 100%;
+    }
+
+    .section-title {
+        text-align: center;
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(28px, 6vw, 48px);
+        margin-bottom: 20px;
+        color: var(--text-dark);
+        position: relative;
+        word-wrap: break-word;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    }
+
+    .section-subtitle {
+        text-align: center;
+        color: var(--text-light);
+        font-size: clamp(14px, 3vw, 18px);
+        margin-bottom: 60px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 20px;
+    }
+
+    /* GRID MEJORADO */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+        gap: clamp(20px, 4vw, 40px);
+        margin-top: 60px;
+        width: 100%;
+    }
+
+    .card {
+        background: var(--white);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.4s ease;
+        position: relative;
+        width: 100%;
+    }
+
+    .card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: 1;
+    }
+
+    .card:hover::before {
+        opacity: 0.1;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .card-image {
+        position: relative;
+        overflow: hidden;
+        height: 250px;
+        width: 100%;
+    }
+
+    .card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .card:hover .card-image img {
+        transform: scale(1.1) rotate(2deg);
+    }
+
+    .card-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .card:hover .card-overlay {
+        opacity: 1;
+    }
+
+    .card-content {
+        padding: clamp(20px, 4vw, 30px);
+        position: relative;
+        z-index: 2;
+    }
+
+    .card h4 {
+        margin: 0 0 15px 0;
+        font-size: clamp(18px, 4vw, 24px);
+        font-family: 'Playfair Display', serif;
+        color: var(--text-dark);
+        font-weight: 600;
+    }
+
+    .card p {
+        font-size: clamp(13px, 3vw, 15px);
+        color: var(--text-light);
+        line-height: 1.7;
+        margin: 0;
+    }
+
+    /* SOBRE NOSOTROS */
+    .about-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+        gap: clamp(30px, 6vw, 60px);
+        align-items: center;
+        margin-top: 40px;
+        width: 100%;
+    }
+
+    .about-image {
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        position: relative;
+        width: 100%;
+    }
+
+    .about-image img {
+        width: 100%;
+        height: clamp(300px, 50vw, 500px);
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .about-image:hover img {
+        transform: scale(1.05);
+    }
+
+    .about-text {
+        padding: clamp(10px, 3vw, 20px);
+    }
+
+    .about-text h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(24px, 5vw, 36px);
+        margin-bottom: 25px;
+        color: var(--accent);
+    }
+
+    .about-text p {
+        font-size: clamp(14px, 3vw, 17px);
+        line-height: 1.9;
+        color: var(--text-light);
+        margin-bottom: 20px;
+    }
+
+    .feature-list {
+        list-style: none;
+        padding: 0;
+        margin-top: 30px;
+    }
+
+    .feature-list li {
+        padding: 12px 0;
+        font-size: clamp(13px, 3vw, 16px);
+        color: var(--text-light);
+        position: relative;
+        padding-left: 30px;
+    }
+
+    .feature-list li::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    /* GALERÍA */
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+        gap: clamp(15px, 3vw, 20px);
+        margin-top: 60px;
+        width: 100%;
+    }
+
+    .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        height: clamp(200px, 40vw, 300px);
+        cursor: pointer;
+        box-shadow: var(--shadow-sm);
+        width: 100%;
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.6s ease;
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.15);
+        filter: brightness(0.8);
+    }
+
+    .gallery-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 100%);
+        padding: clamp(15px, 3vw, 30px) clamp(10px, 2vw, 20px);
+        transform: translateY(100%);
+        transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+        transform: translateY(0);
+    }
+
+    .gallery-overlay h5 {
+        color: white;
+        margin: 0;
+        font-size: clamp(14px, 3vw, 18px);
+        font-weight: 600;
+    }
+
+    /* CONTACTO */
+    .contact-container {
+        background: var(--white);
+        border-radius: 20px;
+        padding: clamp(30px, 6vw, 60px);
+        box-shadow: var(--shadow-md);
+        max-width: 800px;
+        margin: 40px auto;
+        text-align: center;
+        width: 100%;
+    }
+
+    .contact-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+        gap: clamp(20px, 4vw, 40px);
+        margin-top: 40px;
+    }
+
+    .contact-item {
+        width: 100%;
+    }
+
+    .contact-item h5 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(16px, 3vw, 20px);
+        margin-bottom: 15px;
+        color: var(--accent);
+    }
+
+    .contact-item p {
+        color: var(--text-light);
+        line-height: 1.8;
+        font-size: clamp(13px, 2.5vw, 15px);
+    }
+
+    /* FLOATING BUTTONS CORREGIDOS */
+    .float-button {
+        position: fixed;
+        right: clamp(15px, 3vw, 30px);
+        width: clamp(50px, 10vw, 60px);
+        height: clamp(50px, 10vw, 60px);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-lg);
+        transition: all 0.3s ease;
+        z-index: 999;
+        cursor: pointer;
+    }
+
+    .float-button:hover {
+        transform: scale(1.1);
+    }
+
+    .whatsapp-float {
+        bottom: clamp(20px, 4vw, 30px);
+        background: #25d366;
+        animation: pulse 2s infinite;
+    }
+
+    .instagram-float {
+        bottom: clamp(90px, 15vw, 110px);
+        background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    }
+
+    /* ÍCONOS SVG PARA BOTONES */
+    .whatsapp-float::before {
+        content: '';
+        width: 60%;
+        height: 60%;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>') center/contain no-repeat;
+    }
+
+    .instagram-float::before {
+        content: '';
+        width: 60%;
+        height: 60%;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>') center/contain no-repeat;
+    }
+
+    @keyframes pulse {
+        0%, 100% { box-shadow: var(--shadow-lg); }
+        50% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0.2), var(--shadow-lg); }
+    }
+
+    /* FOOTER */
+    footer {
+        background: linear-gradient(135deg, var(--text-dark) 0%, var(--accent) 100%);
+        color: var(--white);
+        padding: clamp(40px, 8vw, 60px) 5% clamp(20px, 4vw, 30px);
+        margin-top: 100px;
+        width: 100%;
+    }
+
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+        gap: clamp(25px, 5vw, 40px);
+        margin-bottom: 40px;
+    }
+
+    .footer-section h4 {
+        font-family: 'Playfair Display', serif;
+        font-size: clamp(18px, 3vw, 22px);
+        margin-bottom: 20px;
+    }
+
+    .footer-section p {
+        line-height: 1.8;
+        opacity: 0.9;
+        font-size: clamp(13px, 2.5vw, 15px);
+    }
+
+    .footer-section a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        margin: 8px 0;
+        transition: opacity 0.3s;
+    }
+
+    .footer-section a:hover {
+        opacity: 0.7;
+    }
+
+    .footer-bottom {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255,255,255,0.2);
+        opacity: 0.8;
+        font-size: clamp(12px, 2.5vw, 14px);
+    }
+
+    /* RESPONSIVE ADICIONAL */
+    @media (max-width: 768px) {
+        header {
+            flex-direction: column;
+            gap: 10px;
+            padding: 15px 5%;
+        }
+
+        nav {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .hero {
+            min-height: 90vh;
+        }
+
+        .hero-decoration {
+            display: none;
+        }
+
+        .card-image {
+            height: 200px;
+        }
+
+        .gallery-item {
+            height: 250px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .section {
+            padding: 50px 5%;
+        }
+
+        .btn-main {
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<header id="header">
+    <div class="logo">Delicatesse</div>
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#sobre">Nosotros</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#menu">Menú</a>
+        <a href="#galeria">Galería</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+</header>
+
+<section id="inicio" class="hero">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-content">
+        <h2>Donde Cada Sabor Cuenta una Historia</h2>
+        <p class="hero-subtitle">Pastelería Artesanal • Café de Especialidad</p>
+        <p>Creamos experiencias únicas a través de sabores auténticos, ingredientes seleccionados y una pasión genuina por la repostería. Cada pieza está elaborada con dedicación y cariño.</p>
+        <a class="btn-main" href="https://wa.me/XXXXXXXXXX" target="_blank">Realizar Pedido</a>
+    </div>
+</section>
+
+<section id="sobre" class="section">
+    <h3 class="section-title" data-aos="fade-up">Nuestra Historia</h3>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+        Un espacio donde la tradición se encuentra con la innovación para crear postres que deleitan el alma.
+    </p>
+    <div class="about-content">
+        <div class="about-image" data-aos="fade-right" data-aos-duration="1000">
+            <img src="https://cfp12.edu.ar/pastelero.png" alt="Pastelero decorando un pastel">
+        </div>
+        <div class="about-text" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+            <h3>Pasión y Artesanía en Cada Bocado</h3>
+            <p>**Delicatesse** nació del sueño de compartir la alegría de la repostería artesanal. Desde nuestro humilde comienzo, hemos mantenido nuestro compromiso con la **calidad insuperable** y el uso de materias primas frescas y naturales.</p>
+            <p>Nuestra filosofía es simple: si no es perfecto, no sale de nuestra cocina. Te invitamos a ser parte de nuestra historia, saboreando el legado de la buena pastelería.</p>
+            <ul class="feature-list">
+                <li>Ingredientes 100% naturales.</li>
+                <li>Recetas tradicionales y exclusivas.</li>
+                <li>Elaboración artesanal diaria.</li>
+                <li>Ambiente cálido y acogedor.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<hr>
+
+<section id="servicios" class="section">
+    <h3 class="section-title" data-aos="fade-up">Nuestros Servicios</h3>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+        Más allá del café y la pastelería. Te ofrecemos soluciones completas para tus eventos más especiales.
+    </p>
+    <div class="grid">
+        <div class="card" data-aos="zoom-in" data-aos-delay="200">
+            <div class="card-image">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/054/415/493/small_2x/delicious-layers-of-cake-paired-with-a-latte-in-a-cozy-cafe-setting-during-afternoon-hours-free-photo.jpeg" alt="Café de especialidad en taza de diseño">
+            </div>
+            <div class="card-content">
+                <h4>Café de Especialidad ☕</h4>
+                <p>Granos seleccionados y tostados a la perfección. Disfruta de la mejor experiencia de café, desde un Espresso intenso hasta un cremoso Latte.</p>
+            </div>
+        </div>
+        <div class="card" data-aos="zoom-in" data-aos-delay="300">
+            <div class="card-image">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/045/891/188/small_2x/table-full-of-cakes-and-desserts-free-photo.jpeg" alt="Mesa con postres y tortas para evento">
+            </div>
+            <div class="card-content">
+                <h4>Catering para Eventos 🎂</h4>
+                <p>Personalizamos mesas de postres y pastelería para bodas, cumpleaños y eventos corporativos. Calidad y diseño garantizados.</p>
+            </div>
+        </div>
+        <div class="card" data-aos="zoom-in" data-aos-delay="400">
+            <div class="card-image">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/035/742/122/small_2x/ai-generated-an-image-of-a-bakery-display-featuring-a-variety-of-freshly-baked-pastries-croissants-and-danishes-generative-ai-photo.jpg" alt="Bandeja de pastelería para llevar">
+            </div>
+            <div class="card-content">
+                <h4>Pedidos y Take-Away 📦</h4>
+                <p>Realiza tus pedidos por adelantado y recógelos en nuestra tienda o te los enviamos a domicilio. Tu momento dulce, donde lo necesites.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr>
+
+<section id="menu" class="section">
+    <h3 class="section-title" data-aos="fade-up">Nuestros Destacados</h3>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+        Descubre los postres y el café que nos hacen famosos. ¡Los favoritos de nuestros clientes!
+    </p>
+    <div class="grid">
+        <div class="card" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-image">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/043/173/078/small_2x/assorted-pastries-on-a-table-free-photo.jpeg" alt="Cheesecake con frutos rojos">
+            </div>
+            <div class="card-content">
+                <h4>Cheesecake New York</h4>
+                <p>Cremosa base de queso, galleta crujiente y una capa de frutos rojos frescos. Un clásico irresistible.</p>
+            </div>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-image">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/036/179/573/small_2x/ai-generated-a-tempting-display-of-petite-cakes-in-various-flavors-and-colors-eid-and-ramadan-images-photo.jpeg" alt="Croissant recién horneado">
+            </div>
+            <div class="card-content">
+                <h4>Croissant de Mantequilla</h4>
+                <p>Hecho con pura mantequilla, crujiente por fuera y tierno por dentro. Perfecto para empezar el día.</p>
+            </div>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="400">
+            <div class="card-image">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/007/327/452/small_2x/red-velvet-cake-decorated-with-fresh-strawberries-and-fruit-on-white-plate-photo.jpg" alt="Tiramisú en una copa">
+            </div>
+            <div class="card-content">
+                <h4>Tiramisú Clásico</h4>
+                <p>Capas de bizcocho empapado en café, crema de mascarpone y un toque de cacao. El sabor de Italia.</p>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center; margin-top: 60px;">
+        <a class="btn-main" href="#contacto" data-aos="zoom-in" data-aos-delay="500">Ver Menú Completo</a>
+    </div>
+</section>
+
+<hr>
+
+<section id="galeria" class="section">
+    <h3 class="section-title" data-aos="fade-up">Nuestra Galería</h3>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+        Un vistazo a algunas de nuestras creaciones más populares y momentos especiales.
+    </p>
+    <div class="gallery-grid">
+        <div class="gallery-item" data-aos="zoom-in">
+            <img src="https://i.pinimg.com/564x/b1/d2/32/b1d232e97806b86869503840b2a5ea55.jpg" alt="Macarons de colores">
+            <div class="gallery-overlay"><h5>Macarons Artesanales</h5></div>
+        </div>
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+            <img src="https://assets.tmecosys.com/image/upload/t_web_rdp_recipe_584x480_1_5x/img/recipe/ras/Assets/4ADF5D92-29D0-4EB7-8C8B-5C7DAA0DA74A/Derivates/E5E1004A-1FF0-448B-87AF-31393870B653.jpg" alt="Tarta de chocolate triple capa">
+            <div class="gallery-overlay"><h5>Tarta de Chocolate</h5></div>
+        </div>
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+            <img src="https://annaspasteleria.com/images/_imageBlock/DSC_1311web.jpg" alt="Decoración de galletas con glaseado">
+            <div class="gallery-overlay"><h5>Galletas Personalizadas</h5></div>
+        </div>
+        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+            <img src="https://www.shutterstock.com/image-photo/vintage-photography-style-coffee-desserts-600nw-1770936080.jpg" alt="Mesa de café y pastelería en la tienda">
+            <div class="gallery-overlay"><h5>Nuestra Tienda</h5></div>
+        </div>
+    </div>
+</section>
+
+<hr>
+
+<section id="contacto" class="section">
+    <h3 class="section-title" data-aos="fade-up">Contáctanos</h3>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+        ¿Tienes una consulta o quieres hacer un pedido especial? ¡Estamos listos para ayudarte!
+    </p>
+    <div class="contact-container" data-aos="fade-up" data-aos-delay="200">
+        <p style="color: var(--text-dark); margin-bottom: 30px;">Puedes visitarnos, llamarnos o escribirnos. ¡Te esperamos!</p>
+        <div class="contact-info">
+            <div class="contact-item">
+                <h5>Dirección</h5>
+                <p>Avenida Principal 123, <br> Barrio Centro, Ciudad</p>
+            </div>
+            <div class="contact-item">
+                <h5>Teléfono</h5>
+                <p>+54 9 11 1234 5678</p>
+            </div>
+            <div class="contact-item">
+                <h5>Horario</h5>
+                <p>Lun-Sáb: 8:00 - 20:00<br>Dom: 9:00 - 18:00</p>
+            </div>
+        </div>
+        <div style="margin-top: 40px;">
+            <a class="btn-main" href="mailto:info@delicatesse.com">Enviar un Email</a>
+        </div>
+    </div>
+</section>
+
+<a href="https://wa.me/XXXXXXXXXX" class="float-button whatsapp-float" target="_blank"></a>
+<a href="https://www.instagram.com/tu_pasteleria/" class="float-button instagram-float" target="_blank"></a>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Delicatesse</h4>
+            <p>La mejor pastelería artesanal y café de especialidad. Comprometidos con la calidad y el sabor.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Enlaces Rápidos</h4>
+            <a href="#inicio">Inicio</a>
+            <a href="#menu">Menú</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#contacto">Contacto</a>
+        </div>
+        <div class="footer-section">
+            <h4>Síguenos</h4>
+            <a href="https://www.instagram.com/tu_pasteleria/" target="_blank">Instagram</a>
+            <a href="https://facebook.com/tu_pasteleria" target="_blank">Facebook</a>
+        </div>
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <a href="#">Política de Privacidad</a>
+            <a href="#">Términos y Condiciones</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        &copy; 2025 Café & Pastelería Delicatesse. Todos los derechos reservados.
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    // Inicializar AOS (Animation On Scroll)
+    AOS.init({
+        duration: 1200, // Duración de la animación en ms
+        once: true,     // Si la animación solo debe ocurrir una vez
+    });
+
+    // Script para el efecto 'scrolled' en el header
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Script opcional para el smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
