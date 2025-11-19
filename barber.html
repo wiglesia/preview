@@ -153,8 +153,9 @@
         /* Redes Sociales */
         .social-links {
             display: flex;
-            gap: 15px;
+            gap: 25px;
             margin-right: 25px;
+            margin-left: 25px;
         }
 
         .social-links a {
@@ -178,7 +179,7 @@
         /* 2. SECCIÓN DE INICIO (HERO) */
         .hero-section {
             min-height: 100vh;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(212, 175, 55, 0.2)), url('https://static.vecteezy.com/system/resources/thumbnails/073/303/203/small_2x/a-city-street-at-night-with-cars-and-lights-free-photo.jpeg') center center/cover no-repeat;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.877), rgba(113, 93, 24, 0.446)), url('https://static.vecteezy.com/system/resources/thumbnails/073/303/203/small_2x/a-city-street-at-night-with-cars-and-lights-free-photo.jpeg') center center/cover no-repeat;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -205,6 +206,7 @@
         .hero-content p {
             font-size: 1.4rem;
             color: var(--color-text-subtle);
+            text-shadow: 0 2px 15px black;
             margin-bottom: 2rem;
         }
 
@@ -213,6 +215,7 @@
             gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
+            
         }
 
         /* 3. SECCIÓN SOBRE NOSOTROS */
@@ -661,7 +664,7 @@
             <p>La tradición del buen afeitado y los cortes impecables. Reserva tu momento de relax y estilo en la barbería más cool de la ciudad.</p>
             <div class="hero-buttons">
                 <a href="#servicios" class="btn-primary">Ver Servicios</a>
-                <a href="#contacto" class="btn-secondary">Reservar Ahora</a>
+                <a href="#contacto" class="btn-secondary" style="text-decoration: none; padding: 16px;border-radius: 16px;">Reservar Ahora</a>
             </div>
         </div>
     </section>
