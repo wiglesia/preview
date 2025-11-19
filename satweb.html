@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🛰️ SAT-WEB - Instalación y Soporte de Internet Satelital Premium</title>
+  <meta name="description" content="Expertos en instalación, configuración y soporte 24/7 de sistemas de Internet Satelital de Alta Velocidad. Conexión estable en zonas rurales y remotas.">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* VARIABLES Y RESET */
+    :root {
+      --negro: #0D0D0D;
+      --gris: #1C1C1C;
+      --blanco: #F8F9FA;
+      --azul: #4DA6FF; 
+      --plata: #D9D9D9;
+      --azul-oscuro: #2A6CA6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      background: var(--negro);
+      color: var(--blanco);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 { font-weight: 700; }
+    h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 20px; }
+    p { color: var(--plata); font-weight: 300; }
+
+    .container { width: 90%; max-width: 1200px; margin: auto; }
+
+    /* NAVEGACIÓN */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%;
+      background: transparent;
+      padding: 15px 0;
+      z-index: 1000;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(0, 0, 0, 0.98);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+    nav .nav-content {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .logo { font-size: 1.6rem; color: var(--azul); font-weight: 800; text-decoration: none; }
+    .nav-links a {
+      color: var(--blanco);
+      text-decoration: none;
+      margin-left: 30px;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--azul); }
+    .menu-toggle {
+      display: none; 
+      cursor: pointer;
+      font-size: 2rem;
+      color: var(--blanco);
+    }
+    
+    /* HERO: CONTENEDOR DE VIDEO */
+    header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative; /* Necesario para posicionar el video */
+      padding-top: 80px;
+      overflow: hidden;
+    }
+
+    /* Video de Fondo */
+    #background-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: 1;
+      transform: translate(-50%, -50%);
+      object-fit: cover; /* Asegura que cubra todo el espacio */
+    }
+    
+    /* Overlay Oscuro para Texto Legible */
+    header::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.902); /* Capa oscura uniforme */
+      z-index: 2;
+    }
+
+    /* Contenido del Hero sobre el video */
+    header .content {
+      position: relative;
+      z-index: 3;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+    }
+
+    header h1 {
+      font-size: clamp(3rem, 7vw, 5rem);
+      color: var(--blanco);
+      text-shadow: 0 0 25px rgba(77,166,255,1);
+      margin-bottom: 15px;
+      font-weight: 800;
+    }
+
+    header p {
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      margin: 20px 0 50px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* BOTONES (Mantienen el estilo anterior) */
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--azul); color: var(--negro); 
+      padding: 15px 35px; border-radius: 40px; font-weight: 700;
+      text-decoration: none; margin: 10px; transition: 0.3s ease;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .btn:hover {
+      background: var(--blanco); color: var(--azul-oscuro);
+      box-shadow: 0 0 30px var(--azul); transform: translateY(-5px) scale(1.02);
+    }
+
+    /* SECCIONES y CARDS */
+    section { padding: 100px 20px; text-align: center; }
+
+    .services, .benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .card, .benefit {
+      background: var(--gris); padding: 35px; border-radius: 15px;
+      border: 2px solid transparent; transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+      opacity: 0; transform: translateY(50px); text-align: left;
+    }
+    .card h3, .benefit h3 { font-size: 1.5rem; margin-bottom: 10px; }
+    .card p, .benefit p { font-size: 0.95rem; }
+
+    .card:hover, .benefit:hover {
+      transform: translateY(-8px) scale(1.03);
+      box-shadow: 0 15px 35px rgba(77,166,255,0.4);
+      border-color: var(--azul);
+    }
+    .visible { opacity: 1 !important; transform: translateY(0) !important; }
+
+    .icon {
+      width: 60px; height: 60px; margin-bottom: 20px; stroke: var(--azul);
+      fill: none; stroke-linecap: round; stroke-linejoin: round;
+    }
+    
+    .benefit { text-align: center; }
+    .benefit h3 { color: var(--azul); margin-bottom: 5px; font-weight: 700; }
+    hr { border: 0.5px solid rgba(77,166,255,0.1); margin: 0 0 0 0; }
+    
+    /* TESTIMONIOS: Corregido el contenedor para evitar desaparición */
+    .testimonial-container {
+      max-width: 750px;
+      margin: 40px auto 0;
+      position: relative;
+      min-height: 250px; 
+    }
+    .testimonial {
+      opacity: 0;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      transition: opacity 1s ease-in-out;
+      background: var(--gris);
+      padding: 35px;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+    .testimonial.active { 
+      opacity: 1; 
+      position: relative; /* Vuelve a posición normal al estar activo */
+    }
+    .testimonial img {
+      width: 80px; height: 80px; border-radius: 50%; object-fit: cover;
+      border: 3px solid var(--azul);
+    }
+    .stars { color: gold; font-size: 1.4rem; }
+    .testimonial p { font-style: italic; font-size: 1.1rem; color: var(--blanco); }
+
+    /* MEDIA QUERIES - RESPONSIVE DESIGN */
+    @media (max-width: 850px) {
+      /* Navegación Móvil */
+      .nav-links {
+        position: fixed; top: 0; right: 0; height: 100vh;
+        width: 70%; max-width: 300px; background: var(--gris);
+        flex-direction: column; padding-top: 100px;
+        transform: translateX(100%); transition: transform 0.3s ease-in-out;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.7);
+      }
+      .nav-links.active { transform: translateX(0); }
+      .nav-links a { margin: 20px 0; text-align: center; font-size: 1.2rem; display: block; }
+      .menu-toggle { display: block; }
+      .nav-links .btn { margin-top: 30px; }
+
+      /* Hero */
+      header { min-height: 80vh; }
+      header h1 { font-size: clamp(2rem, 10vw, 4rem); }
+      .card, .benefit { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="container nav-content">
+      <a href="#hero" class="logo">SAT-WEB 🛰️</a>
+      <div class="nav-links" id="nav-links">
+        <a href="#servicios">Servicios</a>
+        <a href="#beneficios">Ventajas</a>
+        <a href="#testimonios">Opiniones</a>
+        <a href="https://wa.me/521234567890" class="btn" style="padding: 10px 20px; margin: 0;">Contactar</a>
+      </div>
+      <div class="menu-toggle" id="menu-toggle">☰</div>
+    </div>
+  </nav>
+
+  <header id="hero">
+    <video autoplay loop muted playsinline id="background-video">
+      <source src="https://static.vecteezy.com/system/resources/previews/052/264/161/mp4/an-artist-s-rendering-of-a-satellite-in-space-free-video.mp4" type="video/mp4">
+      Tu navegador no soporta el video de fondo.
+    </video>
+
+    <div class="content container">
+      <h1>Internet Satelital de **Alta Velocidad**</h1>
+      <p>Instalación **Certificada** y Soporte Técnico **24/7** para una conexión sin interrupciones. Llevamos el internet rápido a zonas donde la fibra no existe.</p>
+      <a href="#servicios" class="btn">
+        Ver Soluciones
+      </a>
+      <a href="https://wa.me/521234567890?text=Hola,%20necesito%20asesor%C3%ADa%20sobre%20Internet%20Satelital." class="btn" style="background: var(--gris); color: var(--blanco); border: 2px solid var(--azul);">
+        💬 Asesoría Inmediata
+      </a>
+    </div>
+  </header>
+
+  <section id="servicios" class="container">
+    <h2 style="color:var(--azul);">Soluciones de Conectividad Satelital</h2>
+    <p>Garantizamos el mejor rendimiento y estabilidad para tu Internet.</p>
+    <div class="services">
+      <div class="card">
+        <svg class="icon" viewBox="0 0 24 24" stroke-width="2"><path d="M12 2L3 7v10l9 5 9-5V7l-9-5zm0 13l-6-3V8l6 3 6-3v5l-6 3z"/></svg>
+        <h3>Instalación Profesional</h3>
+        <p>Montaje seguro y alineación precisa de tu antena satelital para máxima recepción de señal. Incluye evaluación técnica del sitio.</p>
+      </div>
+      <div class="card">
+        <svg class="icon" viewBox="0 0 24 24" stroke-width="2"><path d="M10 20v-6h4v6a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-8l-9-7-9 7v8a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1z"/></svg>
+        <h3>Optimización de Red</h3>
+        <p>Configuración avanzada de routers, repetidores Mesh y sistemas de cableado interno para eliminar puntos muertos de Wi-Fi.</p>
+      </div>
+      <div class="card">
+        <svg class="icon" viewBox="0 0 24 24" stroke-width="2"><path d="M3 7v10h18V7H3zm3 0h12v4H6V7zm0 6h12v4H6v-4zM12 21v-4M8 21v-4M16 21v-4"/></svg>
+        <h3>Asesoría y Equipos</h3>
+        <p>Selección y venta de equipos de última generación adaptados a tu necesidad (hogar, negocio, o uso itinerante).</p>
+      </div>
+      <div class="card">
+        <svg class="icon" viewBox="0 0 24 24" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M9 12h.01M15 12h.01M12 8v8"/></svg>
+        <h3>Soporte Premium 24/7</h3>
+        <p>Monitoreo constante, diagnóstico remoto y mantenimiento preventivo para asegurar la estabilidad y baja latencia.</p>
+      </div>
+    </div>
+  </section>
+  <hr>
+
+  <section id="beneficios" class="container">
+    <h2 style="color:var(--azul);">Ventajas de Elegir a SAT-WEB</h2>
+    <div class="benefits">
+      <div class="benefit"><h3>⚡ Velocidad Garantizada</h3><p>Accede a la máxima velocidad del servicio satelital.</p></div>
+      <div class="benefit"><h3>💬 Soporte Rápido</h3><p>Atención prioritaria inmediata vía chat o teléfono.</p></div>
+      <div class="benefit"><h3>🛡️ Instalación Segura</h3><p>Trabajo con estándares de calidad y garantía extendida.</p></div>
+      <div class="benefit"><h3>📍 Cobertura Total</h3><p>Conectividad asegurada donde otros proveedores fallan.</p></div>
+      <div class="benefit"><h3>📈 Baja Latencia</h3><p>Ideal para teletrabajo, *gaming* y videollamadas fluidas.</p></div>
+    </div>
+  </section>
+  <hr>
+
+  <section id="testimonios">
+    <h2 style="color:var(--azul);">Lo que Opinan Nuestros Clientes</h2>
+    <div class="testimonial-container">
+      <div class="testimonial active">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Cliente 1">
+        <p>"La instalación fue impecable. Dejé de depender del internet rural lento. Ahora puedo hacer videollamadas sin cortes. ¡Súper recomendados!"</p>
+        <span class="stars">★★★★★</span>
+        <small>- Antonio M., Propietario de Rancho</small>
+      </div>
+      <div class="testimonial">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Cliente 2">
+        <p>"Contacté por la asesoría y me ayudaron a optimizar mi red Mesh. El servicio es de alta calidad y la atención inmediata."</p>
+        <span class="stars">★★★★★</span>
+        <small>- Sofía R., Home Office</small>
+      </div>
+      <div class="testimonial">
+        <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Cliente 3">
+        <p>"Necesitábamos internet de emergencia para una obra remota. Instalaron todo en menos de 24 horas. Profesionales y efectivos."</p>
+        <span class="stars">★★★★☆</span>
+        <small>- Javier P., Gerente de Proyectos</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-final">
+    <h2 style="color:var(--azul);">Da el Salto a la Conexión de Última Generación</h2>
+    <p>No esperes más. Consulta ahora y obtén una cotización personalizada sin compromiso.</p>
+    <a href="https://wa.me/521234567890?text=Hola,%20me%20interesa%20una%20cotizaci%C3%B3n%20para%20Internet%20Satelital." class="btn">
+      Solicitar Cotización
+    </a>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>SAT-WEB - Expertos en Internet Satelital. &copy; 2025 Todos los derechos reservados.</p>
+      <p><a href="#">Política de Privacidad</a> | <a href="#">Términos de Servicio</a></p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/521234567890?text=Hola,%20quisiera%20asesor%C3%ADa%20sobre%20Internet%20Satelital." class="whatsapp" target="_blank" aria-label="Contactar por WhatsApp">💬</a>
+
+  <script>
+    // 1. Animación de aparición en scroll (Intersection Observer)
+    const elementsToAnimate = document.querySelectorAll(".card, .benefit");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target); 
+        }
+      });
+    }, { threshold: 0.15 }); 
+    elementsToAnimate.forEach(el => observer.observe(el));
+
+    // 2. Slider automático de testimonios
+    let index = 0;
+    const testimonials = document.querySelectorAll(".testimonial");
+    
+    // Inicialización para evitar que se muestren todos al cargar
+    testimonials.forEach((t, i) => {
+        if (i === 0) t.classList.add("active");
+        else t.style.opacity = 0;
+    });
+
+    function showNextTestimonial() {
+      // Elimina la clase 'active' para que la transición de opacity funcione correctamente
+      testimonials.forEach(t => t.classList.remove("active"));
+      
+      // Calcula el siguiente índice
+      index = (index + 1) % testimonials.length;
+      
+      // Agrega la clase 'active' al siguiente testimonio
+      testimonials[index].classList.add("active");
+    }
+    setInterval(showNextTestimonial, 5000); 
+
+    // 3. Efecto de scroll en la barra de navegación
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // 4. Funcionalidad del Menú Hamburguesa (RESPONSIVE)
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    
+    menuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    // Cierra el menú si se hace clic en un enlace (en móvil)
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        });
+    });
+  </script>
+</body>
+</html>
