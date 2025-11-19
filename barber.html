@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Classic Cut - Barbería profesional para cortes modernos, afeitados clásicos y arreglos de barba. Reserva tu turno y vive la experiencia premium.">
+    <meta name="keywords" content="barbería, cortes de cabello, afeitado clásico, arreglo de barba, reserva online, estilo moderno">
+    <title>The Classic Cut - Barbería Profesional | Cortes Modernos y Afeitados Clásicos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+    <style>
+        /* Variables de Color: Estilo Peaky Blinders - Masculino, Oscuro, Elegante */
+        :root {
+            --color-dark: #2c2c2c; /* Gris oscuro para fondos */
+            --color-black: #0e0e0e; /* Negro profundo */
+            --color-white: #f5f5dc; /* Beige claro para textos */
+            --color-accent: #D4AF37; /* Dorado elegante */
+            --color-hover: #B8860B; /* Dorado oscuro para hover */
+            --color-text-subtle: #a9a9a9; /* Gris plateado */
+            --color-secondary: #8B0000; /* Rojo oscuro para promociones */
+            --color-brown: #654321; /* Marrón para acentos */
+            
+            --font-primary: 'Playfair Display', serif;
+            --font-secondary: 'Poppins', sans-serif;
+        }
+
+        /* Base y Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-secondary);
+            background-color: var(--color-black);
+            color: var(--color-white);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Títulos Generales de Sección */
+        h2 {
+            font-family: var(--font-primary);
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Botones CTA */
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--color-accent);
+            color: var(--color-black);
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--color-accent);
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-hover);
+            border-color: var(--color-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: var(--color-secondary);
+            color: var(--color-white);
+            border-color: var(--color-secondary);
+        }
+
+        .btn-secondary:hover {
+            background-color: #a52a2a;
+            border-color: #a52a2a;
+        }
+
+        /* 1. CABECERA Y NAVEGACIÓN */
+        .main-header {
+            position: fixed;
+            width: 100%;
+            background: rgba(44, 44, 44, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.7);
+        }
+        
+        .logo {
+            font-family: var(--font-primary);
+            font-size: 1.8rem;
+            color: var(--color-accent);
+            flex-shrink: 0;
+        }
+
+        .nav-menu {
+            flex-grow: 1;
+            text-align: right;
+        }
+
+        .nav-menu a {
+            color: var(--color-white);
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--color-accent);
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Redes Sociales */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-right: 25px;
+        }
+
+        .social-links a {
+            color: var(--color-white);
+            font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--color-accent);
+            transform: scale(1.2);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+        
+        /* 2. SECCIÓN DE INICIO (HERO) */
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(212, 175, 55, 0.2)), url('https://static.vecteezy.com/system/resources/thumbnails/073/303/203/small_2x/a-city-street-at-night-with-cars-and-lights-free-photo.jpeg') center center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+            position: relative;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            padding: 1rem;
+        }
+        
+        .hero-content h1 {
+            font-family: var(--font-primary);
+            font-size: clamp(3rem, 7vw, 5rem);
+            margin-bottom: 1rem;
+            color: var(--color-white);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content p {
+            font-size: 1.4rem;
+            color: var(--color-text-subtle);
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* 3. SECCIÓN SOBRE NOSOTROS */
+        .about-section {
+            background-color: var(--color-dark);
+            padding: 80px 5%;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            text-align: left;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 4. SECCIÓN DE SERVICIOS */
+        .services-section {
+            background-color: var(--color-black);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background: var(--color-dark);
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s;
+            border: 1px solid var(--color-brown);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+            border-color: var(--color-accent);
+        }
+        
+        .service-card i {
+            font-size: 3.5rem;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-family: var(--font-primary);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--color-white);
+        }
+
+        .service-card p {
+            margin-bottom: 20px;
+        }
+
+        .service-card .price {
+            font-size: 1.6rem;
+            color: var(--color-accent);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .service-card .btn-primary {
+            margin-top: 10px;
+        }
+        
+        /* 5. SECCIÓN DE PROMOCIONES */
+        .promo-section {
+            background: linear-gradient(135deg, var(--color-accent), var(--color-secondary));
+            color: var(--color-white);
+            text-align: center;
+            padding: 80px 5%;
+        }
+
+        .promo-content h2 {
+            color: var(--color-white);
+        }
+
+        .promo-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .promo-card {
+            background: rgba(245, 245, 220, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .promo-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .promo-card .old-price {
+            text-decoration: line-through;
+            color: #ffcccc;
+        }
+
+        .promo-card .new-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+
+        /* 6. SECCIÓN DE TESTIMONIOS */
+        .testimonials-section {
+            background-color: var(--color-dark);
+        }
+
+        .testimonials-slider {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .testimonial p {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .testimonial .author {
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+
+        /* 7. SECCIÓN DE GALERÍA */
+        .gallery-section {
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto 40px;
+        }
+        
+        .gallery-item {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+        }
+        
+        /* 8. SECCIÓN DE CONTACTO */
+        .contact-section {
+            background-color: var(--color-black);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .contact-info h3 {
+            font-family: var(--font-primary);
+            color: var(--color-accent);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .contact-info i {
+            color: var(--color-accent);
+            margin-right: 15px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .contact-info a {
+            color: var(--color-white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: var(--color-accent);
+        }
+
+        /* Formulario */
+        .contact-form {
+            background: var(--color-dark);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact-form h3 {
+            color: var(--color-accent);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid var(--color-brown);
+            background: #222;
+            color: var(--color-white);
+            border-radius: 8px;
+            font-family: var(--font-secondary);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            border-color: var(--color-accent);
+            outline: none;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            height: 120px;
+        }
+        
+        .contact-form button {
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        /* 9. PIE DE PÁGINA */
+        footer {
+            text-align: center;
+            padding: 40px 10px;
+            border-top: 1px solid var(--color-brown);
+            color: var(--color-text-subtle);
+            font-size: 0.9rem;
+            background-color: var(--color-dark);
+        }
+
+        .footer-social {
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        /* Modal para Reserva */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--color-dark);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal-content h3 {
+            color: var(--color-accent);
+            margin-bottom: 20px;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--color-white);
+        }
+
+        /* ========================================= */
+        /* 📱 MEDIA QUERIES (ADAPTACIÓN A MÓVILES) */
+        /* ========================================= */
+        @media (max-width: 900px) {
+            .desktop-only {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: var(--color-dark);
+                padding: 10px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+                text-align: left;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu a {
+                margin: 0;
+                padding: 15px 5%;
+                text-align: left;
+                border-bottom: 1px solid var(--color-brown);
+            }
+
+            .nav-menu a:last-child {
+                border-bottom: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+            
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            section {
+                padding: 60px 5%;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 30px;
+            }
+
+            .promo-cards {
+                grid-template-columns: 1fr;
+            }
+
+                .promo-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="logo">THE CLASSIC CUT</div>
+        
+        <div class="social-links desktop-only">
+            <a href="https://www.instagram.com/TU_INSTAGRAM" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/549XXXXXXXXXX" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/TU_FACEBOOK" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        </div>
+        
+        <nav class="nav-menu">
+            <a href="#inicio">Inicio</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="#servicios">Servicios</a>
+            <a href="#promociones">Promociones</a>
+            <a href="#testimonios">Testimonios</a>
+            <a href="#galeria">Trabajos</a>
+            <a href="#contacto" class="btn-primary">Reservar Turno</a>
+        </nav>
+        
+        <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+    </header>
+
+    <section id="inicio" class="hero-section">
+        <div class="hero-content fade-in-up">
+            <h1>Corte Clásico, Estilo Moderno</h1>
+            <p>La tradición del buen afeitado y los cortes impecables. Reserva tu momento de relax y estilo en la barbería más cool de la ciudad.</p>
+            <div class="hero-buttons">
+                <a href="#servicios" class="btn-primary">Ver Servicios</a>
+                <a href="#contacto" class="btn-secondary">Reservar Ahora</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="nosotros" class="about-section">
+        <div class="about-content">
+            <div class="about-text fade-in-up">
+                <h2>Sobre The Classic Cut</h2>
+                <p>Somos una barbería moderna que combina técnicas tradicionales con tendencias actuales. Nuestro equipo de barberos expertos está dedicado a brindarte una experiencia premium, desde cortes frescos hasta afeitados impecables.</p>
+                <p>Ven y descubre por qué somos la elección de los jóvenes que buscan estilo y calidad. ¡Tu look perfecto te espera!</p>
+                <a href="#servicios" class="btn-primary">Conoce Nuestros Servicios</a>
+            </div>
+            <div class="about-image fade-in-up">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/034/135/111/small_2x/young-man-having-a-haircut-with-a-hair-clippers-free-video.jpg" alt="Equipo de Barberos">
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="services-section">
+        <h2>Nuestros Servicios Premium</h2>
+        <div class="services-grid">
+            <article class="service-card fade-in-up">
+                <i class="fas fa-cut"></i>
+                <h3>Corte de Cabello</h3>
+                <p>Cortes personalizados, clásicos o modernos, adaptados a tu estilo y tipo de pelo. Incluye lavado y peinado.</p>
+                <p class="price">$5.000 ARS</p>
+                <a href="#contacto" class="btn-primary">Reservar</a>
+            </article>
+
+            <article class="service-card fade-in-up">
+                <i class="fas fa-mask"></i>
+                <h3>Afeitado Clásico</h3>
+                <p>Afeitado con navaja, toalla caliente y productos premium para un acabado perfecto y relajante.</p>
+                <p class="price">$4.500 ARS</p>
+                <a href="#contacto" class="btn-primary">Reservar</a>
+            </article>
+
+            <article class="service-card fade-in-up">
+                <i class="fas fa-beard"></i>
+                <h3>Arreglo de Barba</h3>
+                <p>Diseño y perfilado de barba, manteniendo la forma y el volumen deseado. Incluye hidratación.</p>
+                <p class="price">$3.500 ARS</p>
+                <a href="#contacto" class="btn-primary">Reservar</a>
+            </article>
+
+            <article class="service-card fade-in-up">
+                <i class="fas fa-spa"></i>
+                <h3>Combo Completo</h3>
+                <p>Corte, afeitado y arreglo de barba en una sesión completa. ¡El paquete perfecto para lucir impecable!</p>
+                <p class="price">$11.000 ARS</p>
+                <a href="#contacto" class="btn-primary">Reservar</a>
+            </article>
+        </div>
+    </section>
+
+    <section id="promociones" class="promo-section">
+        <div class="promo-content">
+            <h2>Ofertas Especiales</h2>
+            <div class="promo-cards">
+                <div class="promo-card fade-in-up">
+                    <h3>Primer Corte 20% OFF</h3>
+                    <p>Para nuevos clientes. ¡Tu primera visita con descuento!</p>
+                    <p class="old-price">$5.000</p>
+                    <p class="new-price">$4.000 ARS</p>
+                </div>
+                <div class="promo-card fade-in-up">
+                    <h3>Combo Estudiante</h3>
+                    <p>Corte + Barba con 15% de descuento para estudiantes.</p>
+                    <p class="old-price">$8.500</p>
+                    <p class="new-price">$7.225 ARS</p>
+                </div>
+                <div class="promo-card fade-in-up">
+                    <h3>Día del Padre</h3>
+                    <p>Regala un combo completo con 10% OFF este mes.</p>
+                    <p class="old-price">$11.000</p>
+                    <p class="new-price">$9.900 ARS</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonios" class="testimonials-section">
+        <h2>Lo Que Dicen Nuestros Clientes</h2>
+        <div class="testimonials-slider">
+            <div class="testimonial fade-in-up">
+                <p>"¡Increíble experiencia! Los barberos son geniales y mi corte quedó perfecto. Recomiendo 100%."</p>
+                <p class="author">- Juan P., 25 años</p>
+            </div>
+            <div class="testimonial fade-in-up">
+                <p>"Vine por un afeitado y me fui con un look nuevo. Ambiente moderno y atención top."</p>
+                <p class="author">- Mateo L., 22 años</p>
+            </div>
+            <div class="testimonial fade-in-up">
+                <p>"Las promociones son geniales. Siempre salgo contento y con estilo fresco."</p>
+                <p class="author">- Lucas R., 28 años</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria" class="gallery-section">
+        <h2>Nuestro Trabajo</h2>
+        <div class="gallery-grid">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/035/290/174/small_2x/cropped-close-up-of-a-gorgeous-young-woman-getting-her-hair-styled-at-the-salon-free-video.jpg" alt="Corte Moderno" class="gallery-item">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/069/328/390/small_2x/close-up-of-a-handsome-man-receiving-a-precise-shave-from-a-skilled-barber-free-video.jpg" alt="Afeitado con Navaja" class="gallery-item">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/037/978/359/small_2x/close-up-of-men-s-hair-cutting-scissors-in-a-beauty-salon-master-cuts-hair-and-beard-of-men-in-the-barbershop-hairdresser-makes-hairstyle-for-a-young-man-video.jpg" alt="Diseño de Barba" class="gallery-item">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/034/091/409/small_2x/man-hairdresser-doing-haircut-beard-adult-men-in-the-men-s-hair-salon-free-video.jpg" alt="Barbero Trabajando" class="gallery-item">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/003/287/809/small_2x/close-of-man-getting-haircut-at-barber-shop-free-video.jpg" alt="Cliente Satisfecho" class="gallery-item">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/003/287/774/small_2x/man-getting-haircut-at-barber-shop-free-video.jpg" alt="Estilo Urbano" class="gallery-item">
+        </div>
+        <a href="#contacto" class="btn-primary">¡Quiero un corte así!</a>
+    </section>
+
+    <section id="contacto" class="contact-section">
+        <h2>Contáctanos y Reserva</h2>
+        <div class="contact-content">
+            <div class="contact-info fade-in-up">
+                <h3>Detalles de Contacto</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Dirección: Av. Principal 1234, Ciudad</p>
+                <p><i class="fas fa-phone"></i> Teléfono: (11) 5555-1234</p>
+                <p><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/549XXXXXXXXXX" target="_blank">(+54) 9 11 XXXXXXXX</a></p>
+                <p><i class="fas fa-clock"></i> Horario: Mar - Sáb, 10:00 - 20:00 | Dom, 12:00 - 18:00</p>
+                <p><i class="fas fa-envelope"></i> Email: info@theclassicut.com</p>
+            </div>
+            
+            <form class="contact-form fade-in-up" id="reservation-form">
+                <h3>Reserva Rápida</h3>
+                <input type="text" name="name" placeholder="Tu Nombre" required>
+                <input type="tel" name="phone" placeholder="Tu Teléfono (WhatsApp)" required>
+                <select name="service" required>
+                    <option value="">Selecciona el Servicio...</option>
+                    <option value="corte">Corte de Cabello</option>
+                    <option value="afeitado">Afeitado Clásico</option>
+                    <option value="barba">Arreglo de Barba</option>
+                    <option value="combo">Combo Completo</option>
+                </select>
+                <input type="datetime-local" name="datetime" placeholder="Fecha y Hora Preferida" required>
+                <textarea name="comments" placeholder="Comentarios o Preferencias"></textarea>
+                <button type="submit" class="btn-primary">Enviar Reserva</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links footer-social">
+            <a href="https://www.instagram.com/TU_INSTAGRAM" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/549XXXXXXXXXX" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/TU_FACEBOOK" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        </div>
+        <p>&copy; 2025 The Classic Cut. Todos los derechos reservados.</p>
+        <p>Diseño por IGW. | <a href="#" style="color: var(--color-accent);">Política de Privacidad</a></p>
+    </footer>
+
+    <!-- Modal de Confirmación -->
+    <div id="reservation-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>¡Reserva Enviada!</h3>
+            <p>Gracias por elegirnos. Te contactaremos por WhatsApp para confirmar tu turno.</p>
+            <button class="btn-primary" onclick="closeModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        // Menú móvil
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        });
+
+        // Slider de testimonios
+        $('.testimonials-slider').slick({
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 4000,
+            arrows: false
+        });
+
+        // Formulario de reserva
+        document.getElementById('reservation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Aquí puedes agregar lógica para enviar el formulario (ej. AJAX)
+            document.getElementById('reservation-modal').style.display = 'flex';
+        });
+
+        // Cerrar modal
+        document.querySelector('.close').addEventListener('click', closeModal);
+        window.addEventListener('click', function(e) {
+            if (e.target == document.getElementById('reservation-modal')) {
+                closeModal();
+            }
+        });
+
+        function closeModal() {
+            document.getElementById('reservation-modal').style.display = 'none';
+        }
+
+        // Animaciones al scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        });
+
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
