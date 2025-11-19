@@ -7,6 +7,8 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 <style>
@@ -39,7 +41,7 @@
 
     /* HEADER MEJORADO */
     header {
-        background: rgba(255, 255, 255, 0.95);
+        background:rgba(255, 255, 255, 0.488);
         backdrop-filter: blur(10px);
         padding: 15px 5%;
         display: flex;
@@ -78,11 +80,13 @@
         background: var(--primary);
     }
 
+    /* NAV DESKTOP */
     nav {
         display: flex;
         gap: clamp(15px, 3vw, 35px);
         flex-wrap: wrap;
         align-items: center;
+        transition: all 0.4s ease; /* Transición para el menú móvil */
     }
 
     nav a {
@@ -93,12 +97,13 @@
         position: relative;
         transition: color 0.3s ease;
         white-space: nowrap;
+        padding: 5px 0; /* Padding para el área de clic */
     }
 
     nav a::after {
         content: '';
         position: absolute;
-        bottom: -5px;
+        bottom: 0; /* Ajustado a 0 para mejor look con padding */
         left: 50%;
         width: 0;
         height: 2px;
@@ -114,6 +119,18 @@
     nav a:hover::after {
         width: 100%;
     }
+
+    /* MENÚ HAMBURGUESA - NUEVO */
+    .menu-toggle {
+        display: none; /* Ocultar por defecto en desktop */
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--text-dark);
+    }
+    
+    /* ... (El resto del CSS se mantiene igual hasta el responsive) ... */
 
     /* HERO MEJORADO */
     .hero {
@@ -257,7 +274,7 @@
     /* SECTIONS */
     .section {
         padding: clamp(60px, 10vw, 100px) 5%;
-        max-width: 1200px;
+        max-width: 2400px;
         margin: auto;
         width: 100%;
     }
@@ -580,6 +597,7 @@
     }
 
     /* ÍCONOS SVG PARA BOTONES */
+    /* ... (Los iconos SVG se mantienen igual) ... */
     .whatsapp-float::before {
         content: '';
         width: 60%;
@@ -649,33 +667,81 @@
         font-size: clamp(12px, 2.5vw, 14px);
     }
 
-    /* RESPONSIVE ADICIONAL */
-    @media (max-width: 768px) {
+    /* RESPONSIVE ADICIONAL Y MEJORADO */
+    @media (max-width: 900px) { /* Ajuste en el punto de quiebre para el menú */
+        /* HEADER y MENÚ MOBILE */
+        .menu-toggle {
+            display: block; /* Mostrar botón hamburguesa */
+        }
+
         header {
-            flex-direction: column;
-            gap: 10px;
-            padding: 15px 5%;
+            flex-direction: row; /* Mantener logo y botón en la misma fila */
+            background:rgba(255, 255, 255, 0.488);
+            justify-content: space-between;
         }
 
         nav {
+            position: absolute;
+            top: 100%; /* Debajo del header */
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.638);
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px 5%;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            max-height: 0; /* Ocultar por defecto */
+            overflow: hidden;
+            pointer-events: none; /* Deshabilitar clics cuando está oculto */
+        }
+
+        nav.open {
+            max-height: 500px; /* Mostrar menú */
+            pointer-events: auto;
+            box-shadow: var(--shadow-md);
+        }
+        
+        nav a {
+            font-size: 16px; /* Ajuste para mejor lectura en móvil */
             width: 100%;
-            justify-content: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        nav a:last-child {
+            border-bottom: none;
         }
 
         .hero {
-            min-height: 90vh;
+             min-height: 80vh; /* Ajuste para dejar más espacio en la pantalla */
         }
-
-        .hero-decoration {
-            display: none;
+        
+        .contact-info {
+            grid-template-columns: 1fr; /* Una columna en contacto */
         }
+        
+        .contact-item {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--secondary);
+        }
+        
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+    }
 
+    @media (max-width: 768px) {
+         /* AJUSTES GENERALES */
+         .section-subtitle {
+             margin-bottom: 40px;
+         }
+         
         .card-image {
             height: 200px;
         }
 
         .gallery-item {
-            height: 250px;
+            height: 200px; /* Reducción de tamaño en galería */
         }
     }
 
@@ -685,9 +751,23 @@
         }
 
         .btn-main {
-            width: 100%;
-            max-width: 300px;
-            text-align: center;
+            /* Mantenemos el comportamiento de inline-block en la mayoría de los casos */
+            /* Se ve mejor que forzar 100% de ancho en el hero */
+            padding: 12px 30px; 
+        }
+
+        .float-button {
+            width: 45px;
+            height: 45px;
+            right: 10px;
+        }
+
+        .whatsapp-float {
+            bottom: 15px; /* Ajuste para el espacio en pantallas pequeñas */
+        }
+        
+        .instagram-float {
+            bottom: 75px; /* Ajuste para el espacio en pantallas pequeñas */
         }
     }
 </style>
@@ -697,7 +777,10 @@
 
 <header id="header">
     <div class="logo">Delicatesse</div>
-    <nav>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú de navegación">
+        <i class="fas fa-bars"></i>
+    </button>
+    <nav id="nav-menu">
         <a href="#inicio">Inicio</a>
         <a href="#sobre">Nosotros</a>
         <a href="#servicios">Servicios</a>
@@ -913,7 +996,7 @@
     // Inicializar AOS (Animation On Scroll)
     AOS.init({
         duration: 1200, // Duración de la animación en ms
-        once: true,     // Si la animación solo debe ocurrir una vez
+        once: true,     // Si la animación solo debe ocurrir una vez
     });
 
     // Script para el efecto 'scrolled' en el header
@@ -926,10 +1009,35 @@
         }
     });
 
-    // Script opcional para el smooth scroll
+    // Script para el menú hamburguesa - NUEVO
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('open');
+        // Cambiar el ícono
+        const icon = menuToggle.querySelector('i');
+        if (navMenu.classList.contains('open')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times'); // 'fa-times' o 'fa-xmark' para cerrar
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+
+    // Script opcional para el smooth scroll (y cerrar menú en móvil al hacer clic)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
+
+            // Cerrar menú si está abierto (solo en móviles)
+            if (window.innerWidth <= 900) {
+                 navMenu.classList.remove('open');
+                 menuToggle.querySelector('i').classList.remove('fa-times');
+                 menuToggle.querySelector('i').classList.add('fa-bars');
+            }
+
             document.querySelector(this.getAttribute('href')).scrollIntoView({
                 behavior: 'smooth'
             });
